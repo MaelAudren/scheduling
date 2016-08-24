@@ -36,9 +36,13 @@
  */
 package org.ow2.proactive.resourcemanager.common.event;
 
+
+import org.json.JSONObject;
 import org.objectweb.proactive.annotation.PublicAPI;
 import org.ow2.proactive.resourcemanager.common.RMConstants;
 import org.ow2.proactive.resourcemanager.frontend.RMMonitoring;
+
+import java.util.Set;
 
 
 /**
@@ -70,6 +74,8 @@ public class RMNodeSourceEvent extends RMEvent {
 
     private String nodeSourceAdmin = null;
 
+    private Set<JSONObject> nodeSourceInstances = null;
+
     /**
      * ProActive Empty constructor.
      */
@@ -96,6 +102,19 @@ public class RMNodeSourceEvent extends RMEvent {
         this.nodeSourceName = nodeSourceName;
         this.nodeSourceDescription = nodeSourceDescription;
         this.nodeSourceAdmin = nodeSourceAdmin;
+    }
+
+    /**
+     * Creates an RMNodesourceEvent object for cloud node
+     */
+    public RMNodeSourceEvent(RMEventType type, String initiator, String nodeSourceName,
+                             String nodeSourceDescription, String nodeSourceAdmin, Set<JSONObject> nodeSourceInstances) {
+        super(type);
+        this.initiator = initiator;
+        this.nodeSourceName = nodeSourceName;
+        this.nodeSourceDescription = nodeSourceDescription;
+        this.nodeSourceAdmin = nodeSourceAdmin;
+        this.nodeSourceInstances = nodeSourceInstances;
     }
 
     /**
@@ -134,6 +153,16 @@ public class RMNodeSourceEvent extends RMEvent {
     public String getNodeSourceAdmin() {
         return nodeSourceAdmin;
     }
+
+    /**
+     * Returns the description of the node source instances .
+     * @return the node source instances description.
+     */
+    public Set<JSONObject> getNodeSourceInstances() {
+        return nodeSourceInstances;
+    }
+
+
 
     /**
      * @see java.lang.Object#toString()

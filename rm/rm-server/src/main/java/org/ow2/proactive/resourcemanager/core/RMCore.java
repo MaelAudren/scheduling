@@ -37,6 +37,7 @@
 package org.ow2.proactive.resourcemanager.core;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.objectweb.proactive.*;
 import org.objectweb.proactive.annotation.ImmediateService;
 import org.objectweb.proactive.api.PAActiveObject;
@@ -79,6 +80,7 @@ import org.ow2.proactive.resourcemanager.frontend.topology.TopologyException;
 import org.ow2.proactive.resourcemanager.nodesource.NodeSource;
 import org.ow2.proactive.resourcemanager.nodesource.RMNodeConfigurator;
 import org.ow2.proactive.resourcemanager.nodesource.common.PluginDescriptor;
+import org.ow2.proactive.resourcemanager.nodesource.infrastructure.CloudInfrastructure;
 import org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager;
 import org.ow2.proactive.resourcemanager.nodesource.infrastructure.InfrastructureManager;
 import org.ow2.proactive.resourcemanager.nodesource.infrastructure.InfrastructureManagerFactory;
@@ -960,10 +962,16 @@ public class RMCore implements ResourceManager, InitActive, RunActive {
 
         this.nodeSources.put(data.getName(), nodeSource);
 
+        Set<JSONObject> nodeSourceInstances = null;
+
+        if(nodeSource instanceof CloudInfrastructure){
+           nodeSourceInstances = ((CloudInfrastructure) nodeSource).getInstances();
+        }
+
         // generate the event of node source creation
         this.monitoring.nodeSourceEvent(new RMNodeSourceEvent(RMEventType.NODESOURCE_CREATED, provider
                 .getName(), nodeSource.getName(), nodeSource.getDescription(), nodeSource.getAdministrator()
-                .getName()));
+                .getName(),nodeSourceInstances));
 
         logger.info("Node source " + data.getName() + " has been successfully created by " + provider);
 
