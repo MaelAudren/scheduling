@@ -159,6 +159,9 @@ public class RMNodeSourceEvent extends RMEvent {
      * @return the node source instances description.
      */
     public String getNodeSourceInstances() {
+        if (nodeSourceInstances==null){
+            return "No Cloud Instances";
+        }
         String instancesInformation = "";
         for(JSONObject json : nodeSourceInstances){
             instancesInformation+=json.toString()+"\n";
