@@ -158,8 +158,12 @@ public class RMNodeSourceEvent extends RMEvent {
      * Returns the description of the node source instances .
      * @return the node source instances description.
      */
-    public Set<JSONObject> getNodeSourceInstances() {
-        return nodeSourceInstances;
+    public String getNodeSourceInstances() {
+        String instancesInformation = "";
+        for(JSONObject json : nodeSourceInstances){
+            instancesInformation+=json.toString()+"\n";
+        }
+        return instancesInformation;
     }
 
 
