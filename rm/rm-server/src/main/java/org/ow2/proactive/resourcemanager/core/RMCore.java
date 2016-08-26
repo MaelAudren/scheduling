@@ -964,8 +964,8 @@ public class RMCore implements ResourceManager, InitActive, RunActive {
 
         Set<JSONObject> nodeSourceInstances = null;
 
-        if(nodeSource instanceof CloudInfrastructure){
-           nodeSourceInstances = ((CloudInfrastructure) nodeSource).getInstances();
+        if(nodeSource.getInfrastructureManager() instanceof CloudInfrastructure){
+           nodeSourceInstances = ((CloudInfrastructure) nodeSource.getInfrastructureManager()).getInstances();
             logger.info("Node source " + data.getName() + " is a Cloud Infrastructure" );
             if(nodeSourceInstances!=null) {
                 String res ="";

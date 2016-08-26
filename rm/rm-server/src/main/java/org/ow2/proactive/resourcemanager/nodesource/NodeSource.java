@@ -744,4 +744,14 @@ public class NodeSource implements InitActive, RunActive {
     public String getRegistrationURL() {
         return this.registrationURL;
     }
+
+
+    /**
+     * Return the infrastructure manager of the node source
+     * @return the infrastructure manager of the node source
+     */
+    @ImmediateService
+    public InfrastructureManager getInfrastructureManager(){
+        return this.infrastructureManager;
+    }
 }
