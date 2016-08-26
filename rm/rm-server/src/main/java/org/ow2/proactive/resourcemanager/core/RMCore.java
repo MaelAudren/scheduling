@@ -966,6 +966,18 @@ public class RMCore implements ResourceManager, InitActive, RunActive {
 
         if(nodeSource instanceof CloudInfrastructure){
            nodeSourceInstances = ((CloudInfrastructure) nodeSource).getInstances();
+            logger.info("Node source " + data.getName() + " is a Cloud Infrastructure" );
+            if(nodeSourceInstances!=null) {
+                String res ="";
+                for (JSONObject jsonObject :nodeSourceInstances) {
+                    res+=jsonObject.toString()+"\n";
+                }
+                logger.info("Node source instances :"+res );
+            }
+            else{
+                logger.info("Node source instances are null");
+            }
+
         }
 
         // generate the event of node source creation
