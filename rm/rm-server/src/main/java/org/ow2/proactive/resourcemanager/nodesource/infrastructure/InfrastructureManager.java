@@ -630,7 +630,7 @@ public abstract class InfrastructureManager implements Serializable {
      *
      * @return null by default
      */
-    protected Set<JSONObject> getInstances(){
+    public Set<JSONObject> getInstances(){
         return null;
     }
 

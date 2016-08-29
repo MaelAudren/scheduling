@@ -80,7 +80,6 @@ import org.ow2.proactive.resourcemanager.frontend.topology.TopologyException;
 import org.ow2.proactive.resourcemanager.nodesource.NodeSource;
 import org.ow2.proactive.resourcemanager.nodesource.RMNodeConfigurator;
 import org.ow2.proactive.resourcemanager.nodesource.common.PluginDescriptor;
-import org.ow2.proactive.resourcemanager.nodesource.infrastructure.CloudInfrastructureManager;
 import org.ow2.proactive.resourcemanager.nodesource.infrastructure.DefaultInfrastructureManager;
 import org.ow2.proactive.resourcemanager.nodesource.infrastructure.InfrastructureManager;
 import org.ow2.proactive.resourcemanager.nodesource.infrastructure.InfrastructureManagerFactory;
@@ -964,9 +963,8 @@ public class RMCore implements ResourceManager, InitActive, RunActive {
 
         Set<JSONObject> nodeSourceInstances = null;
 
-        if(nodeSource.getInfrastructureManager() instanceof CloudInfrastructureManager){
-           nodeSourceInstances = ((CloudInfrastructureManager) nodeSource.getInfrastructureManager()).getInstances();
-            logger.info("Node source " + data.getName() + " is a Cloud Infrastructure" );
+
+        nodeSourceInstances = nodeSource.getInfrastructureManager().getInstances();
             if(nodeSourceInstances!=null) {
                 String res ="";
                 for (JSONObject jsonObject :nodeSourceInstances) {
@@ -978,10 +976,7 @@ public class RMCore implements ResourceManager, InitActive, RunActive {
                 logger.info("Node source instances are null");
             }
 
-        }else{
-            logger.info("Node source" + data.getName() +" is not a Cloud Infrastructure");
-            //nodeSource.getInfrastructureManager().
-        }
+
 
         // generate the event of node source creation
         this.monitoring.nodeSourceEvent(new RMNodeSourceEvent(RMEventType.NODESOURCE_CREATED, provider
