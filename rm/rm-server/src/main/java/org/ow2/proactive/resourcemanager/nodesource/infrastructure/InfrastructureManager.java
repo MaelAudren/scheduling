@@ -37,6 +37,7 @@
 package org.ow2.proactive.resourcemanager.nodesource.infrastructure;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.objectweb.proactive.core.config.CentralPAPropertyRepository;
 import org.objectweb.proactive.core.node.Node;
 import org.ow2.proactive.resourcemanager.authentication.Client;
@@ -623,6 +624,15 @@ public abstract class InfrastructureManager implements Serializable {
 		}
 		return answer;
 	}
+
+    /**
+     *  To list the resource deployed in cloud infrastructure
+     *
+     * @return null by default
+     */
+    protected Set<JSONObject> getInstances(){
+        return null;
+    }
 
 	// **********************************************************************************************//
 	// *********************** Package private accessors & Helpers
