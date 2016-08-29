@@ -750,7 +750,6 @@ public class NodeSource implements InitActive, RunActive {
      * Return the infrastructure manager of the node source
      * @return the infrastructure manager of the node source
      */
-    @ImmediateService
     public InfrastructureManager getInfrastructureManager(){
         return this.infrastructureManager;
     }
